@@ -6,6 +6,8 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import publicRoutes from "./routes/publicRoutes.js";
 import {authMiddleware} from "./middlewares/authMiddleware.js";
+import adminRoutes from "./routes/adminRoutes.js";
+import {adminMiddleware} from "./middlewares/adminMiddleware.js";
 
 
 const app = express();
@@ -13,6 +15,7 @@ mongoose.set("strictQuery", false);
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use("/secure/api/admin-only", adminMiddleware, adminRoutes);
 app.use(authMiddleware, publicRoutes);
 
 async function start() {
