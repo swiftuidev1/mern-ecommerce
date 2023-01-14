@@ -4,10 +4,6 @@ import jwt from "jsonwebtoken";
 
 const publicRoutes = Router();
 
-publicRoutes.get("/", (req, res) => {
-  res.send("Hello world!");
-});
-
 publicRoutes.post("/admin/secure-login", async (req, res) => {
   try {
     const {email, password} = req.body;
@@ -20,5 +16,10 @@ publicRoutes.post("/admin/secure-login", async (req, res) => {
     res.status(500).json({error: "Server error"});
   }
 });
+
+publicRoutes.post("/do", (req, res) => {
+  console.log(req.customer);
+  res.status(200).json({message: "Success"});
+})
 
 export default publicRoutes;

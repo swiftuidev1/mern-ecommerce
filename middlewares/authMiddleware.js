@@ -8,15 +8,7 @@ export const authMiddleware = (req, res, next) => {
     const decodedValue = jwt.verify(token, process.env.JWT_SECRET || "secret");
     if (decodedValue) {
       Customer.findById(decodedValue.id).exec().then(response => {
-        if (!response) {
-          const newCustomer = new Customer({});
-          newCustomer.save(error => {
-            console.log("Error saving new Customer. ", error);
-          });
-          const token = jwt.sign({id: newCustomer._id.toString()}, process.env.JWT_SECRET);
-          return res.status(200).json({token, justAuthenticated: true});
-        }
-        req.customer = response;
+        if (response) req.customer = response;
         next();
       }).catch(error => {
         console.log("Error finding. ", error);

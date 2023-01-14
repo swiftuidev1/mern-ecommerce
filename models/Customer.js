@@ -37,16 +37,18 @@ const customerShippingAddress = new Schema({
 });
 
 const customerSchema = new Schema({
+  ip: {$type: String},
+  userAgent: {$type: String},
   name: {$type: String},
   email: {$type: String},
   shippingAddress: {$type: customerShippingAddress},
-  views: {$type: [viewedProduct]},
-  favorites: {$type: [Schema.Types.ObjectId], ref: "Product"},
+  viewed: {$type: [viewedProduct], default: []},
+  favorites: {$type: [Schema.Types.ObjectId], ref: "Product", default: []},
   cart: {$type: customerCart},
   suggestions: {$type: [Schema.Types.ObjectId], ref: "Product", default: []},
-
 }, {
   typeKey: "$type",
   timestamps: true,
 });
+customerSchema.index({ip: 1});
 export const Customer = model("Customer", customerSchema);
