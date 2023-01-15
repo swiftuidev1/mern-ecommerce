@@ -6,6 +6,7 @@ import {Terms} from "./screens/Terms";
 import {Cart} from "./screens/Cart";
 import {Checkout} from "./screens/Checkout";
 import {PreCheckout} from "./screens/PreCheckout";
+import {Collections} from "./screens/Collections";
 function App() {
   return (
     <Routes>
@@ -14,6 +15,7 @@ function App() {
       <Route path={"/terms"} element={<Terms />} />
       <Route path={"/cart"} element={<Cart />} />
       <Route path={"/pre-checkout"} element={<PreCheckout />} />
+      <Route path={"/collections/*"} element={<Collections />} />
       <Route path={"/checkout"} element={<Checkout />} />
     </Routes>
   );
